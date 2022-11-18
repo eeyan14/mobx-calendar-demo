@@ -1,16 +1,8 @@
 import React from "react";
-import { observer } from "mobx-react-lite";
-
-import MonthWrapper from "./MonthWrapper";
-// import DayWrapper from "./DayWrapper";
-// import Week from "./views/Week";
-// import MobXInfo from "./views/MobXInfo";
-
-import GithubLogo from "../github_logo.png";
 import "../css/Calendar.css";
 
-const Calendar = observer((props) => {
-    const { view, calendarTitle, setView } = props.store;
+const Calendar = (props) => {
+    const { calendarTitle, renderViews, renderSidebar, view, setView } = props;
 
     const renderViewOptions = () => {
         return (
@@ -46,26 +38,13 @@ const Calendar = observer((props) => {
                         <h1>{calendarTitle}</h1>
                     </div>
 
-                    {view === "month" && <MonthWrapper store={props.store} />}
-                    {/*view === "day" && <DayWrapper store={props.store} />}
-                    {view === "week" && <Week store={props.store} />*/}
+                    {renderViews()}
                 </div>
             </section>
 
-            <section className="sidebar">
-                {/*<MobXInfo store={props.store} />*/}
-            </section>
-
-            <a
-                href="https://github.com/eeyan14/redux-calendar-demo"
-                target="_blank"
-                className="github"
-                rel="noreferrer"
-            >
-                <img src={GithubLogo} alt="link to Github repository" />
-            </a>
+            <section className="sidebar">{renderSidebar()}</section>
         </div>
     );
-});
+};
 
 export default Calendar;
