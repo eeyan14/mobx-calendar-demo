@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mobx-calendar-demo/static/css/main.af652832.css",
-    "main.js": "/mobx-calendar-demo/static/js/main.f52b7fe3.js",
-    "index.html": "/mobx-calendar-demo/index.html",
-    "main.af652832.css.map": "/mobx-calendar-demo/static/css/main.af652832.css.map",
-    "main.f52b7fe3.js.map": "/mobx-calendar-demo/static/js/main.f52b7fe3.js.map"
+    "main.css": "/react-stores-demo/static/css/main.6a7f2c0c.css",
+    "main.js": "/react-stores-demo/static/js/main.3df77b21.js",
+    "index.html": "/react-stores-demo/index.html",
+    "main.6a7f2c0c.css.map": "/react-stores-demo/static/css/main.6a7f2c0c.css.map",
+    "main.3df77b21.js.map": "/react-stores-demo/static/js/main.3df77b21.js.map"
   },
   "entrypoints": [
-    "static/css/main.af652832.css",
-    "static/js/main.f52b7fe3.js"
+    "static/css/main.6a7f2c0c.css",
+    "static/js/main.3df77b21.js"
   ]
 }
