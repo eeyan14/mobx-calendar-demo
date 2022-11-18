@@ -1,21 +1,15 @@
 import React, { useEffect } from "react";
-import { DateTime } from "luxon";
+import { formatEventStartEnd } from "../helpers";
 import "../css/Day.css";
 
 const Day = (props) => {
     const { currentDate, events, fetchEvents } = props;
 
     const renderEvent = (event) => {
-        const startTime = DateTime.now().set({
-            hour: event.start_hour,
-            minute: event.start_min,
-        });
-        const endTime = DateTime.now().set({
-            hour: event.end_hour,
-            minute: event.end_min,
-        });
+        const [startTime, endTime] = formatEventStartEnd(event);
+        const key = `${event.start_hour}-${event.start_min}-${event.end_hour}-${event.end_min}`;
         return (
-            <div className="day-event-tile">
+            <div className="day-event-tile" key={key}>
                 <p>
                     <strong>{event.description}</strong>
                 </p>

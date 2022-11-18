@@ -13,8 +13,32 @@ import { default as CalendarRedux } from "./redux/CalendarWrapper";
 import { default as CalendarMobX } from "./mobx/CalendarWrapper";
 import CalendarStore from "./mobx/CalendarStore";
 
+import "./css/App.css";
+
 const App = () => {
-    const [storeType] = useState("mobx"); // "redux", "mobx"
+    const [storeType, setStoreType] = useState("mobx"); // "redux", "mobx"
+
+    const handleSelectStoreType = (e) => {
+        setStoreType(e.target.value);
+    };
+
+    const renderStoreOptions = () => {
+        return ["Redux", "MobX"].map((option) => {
+            const optionLowercase = option.toLowerCase();
+            return (
+                <label key={option}>
+                    <input
+                        type="radio"
+                        name={optionLowercase}
+                        value={optionLowercase}
+                        checked={storeType === optionLowercase}
+                        onChange={handleSelectStoreType}
+                    />
+                    {option}
+                </label>
+            );
+        });
+    };
 
     const renderCalendar = () => {
         if (storeType === "redux") {
@@ -37,6 +61,8 @@ const App = () => {
     return (
         <div className="Calendar">
             {renderCalendar()}
+
+            <div className="store-type">{renderStoreOptions()}</div>
 
             <a
                 href="https://github.com/eeyan14/react-stores-demo"

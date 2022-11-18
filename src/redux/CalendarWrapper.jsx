@@ -59,9 +59,11 @@ const CalendarWrapper = () => {
         return <ReduxInfo />;
     };
 
+    const calendarTitle = getTitle();
+
     return (
         <Calendar
-            calendarTitle={getTitle}
+            calendarTitle={calendarTitle}
             renderViews={renderViews}
             renderSidebar={renderSidebar}
             view={view}

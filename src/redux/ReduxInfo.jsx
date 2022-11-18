@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
-import "../css/StoreInfo.css";
+import StoreInfo from "../views/StoreInfo";
+import { renderShortEvents } from "../helpers";
 
 /**
  * This is the JSX view for the reducer, not the actual redux reducer,
@@ -17,7 +17,6 @@ const ReduxInfo = () => {
     });
 
     const [dispatchHistory, setDispatchHistory] = useState([]);
-    const [historyHeight, setHistoryHeight] = useState("50vh");
 
     useEffect(() => {
         setDispatchHistory((dispatchHistory) => [
@@ -40,34 +39,7 @@ const ReduxInfo = () => {
         ]);
     }, [events]);
 
-    useEffect(() => {
-        /**
-         * calculate height of current-store div to determine height of
-         * dispatch-history (for scrolling)
-         */
-        const storeHeight =
-            document.getElementById("current-store").clientHeight;
-        setHistoryHeight(`calc(100vh - ${storeHeight}px - 10rem)`);
-    }, [dispatchHistory]);
-
-    const renderShortEvents = (events) => {
-        return (
-            <div>
-                <p>&#123;</p>
-                {Object.keys(events).map((eventKey) => {
-                    return (
-                        <p className="indent">
-                            {eventKey}: [<i>{events[eventKey].length} events</i>
-                            ]
-                        </p>
-                    );
-                })}
-                <p>&#125;</p>
-            </div>
-        );
-    };
-
-    const renderDispatchHistoryItem = (item) => {
+    const renderHistoryItem = (item) => {
         // `type` should be the first item, then other keys
         return (
             <div className="history-values indent">
@@ -78,17 +50,17 @@ const ReduxInfo = () => {
 
                 {Object.keys(item).map((itemKey) => {
                     if (itemKey === "type") {
-                        return <></>;
+                        return <div key={itemKey} />;
                     }
 
                     return (
-                        <div className="flex-row">
+                        <div className="flex-row" key={itemKey}>
                             <p className="code">{itemKey}:</p>
-                            <p>
-                                {itemKey === "events"
-                                    ? renderShortEvents(events)
-                                    : item[itemKey]}
-                            </p>
+                            {itemKey === "events" ? (
+                                renderShortEvents(events)
+                            ) : (
+                                <p>{item[itemKey]}</p>
+                            )}
                         </div>
                     );
                 })}
@@ -96,12 +68,12 @@ const ReduxInfo = () => {
         );
     };
 
-    const renderDispatchHistory = () => {
+    const renderHistory = () => {
         return dispatchHistory.map((item, i) => {
             return (
                 <div className="history-item" key={i}>
                     <p className="code">&#123;</p>
-                    {renderDispatchHistoryItem(item)}
+                    {renderHistoryItem(item)}
                     <p className="code">&#125;</p>
                 </div>
             );
@@ -109,38 +81,13 @@ const ReduxInfo = () => {
     };
 
     return (
-        <div className="reducer-view">
-            <p>
-                <strong>Redux State</strong>
-            </p>
-            <div id="current-store" className="grid">
-                <div className="grid-row">
-                    <p className="code">view</p>
-                    <p>"{view}"</p>
-                </div>
-
-                <div className="grid-row">
-                    <p className="code">currentDate</p>
-                    <p>"{currentDate}"</p>
-                </div>
-
-                <div className="grid-row">
-                    <p className="code">events</p>
-                    <p>{renderShortEvents(events)}</p>
-                </div>
-            </div>
-
-            <p>
-                <strong>Dispatch History</strong>
-            </p>
-            <div
-                id="dispatch-history"
-                className="scroll"
-                style={{ height: historyHeight }}
-            >
-                {renderDispatchHistory()}
-            </div>
-        </div>
+        <StoreInfo
+            view={view}
+            currentDate={currentDate}
+            events={events}
+            history={dispatchHistory}
+            renderHistory={renderHistory}
+        />
     );
 };
 

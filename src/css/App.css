@@ -1,0 +1,40 @@
+.Calendar {
+    position: relative;
+    background: lightgray;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.Calendar a.github {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.Calendar a.github img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.Calendar .store-type {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+}
