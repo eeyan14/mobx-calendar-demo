@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mobx-calendar-demo/static/css/main.af652832.css",
+    "main.js": "/mobx-calendar-demo/static/js/main.f52b7fe3.js",
+    "index.html": "/mobx-calendar-demo/index.html",
+    "main.af652832.css.map": "/mobx-calendar-demo/static/css/main.af652832.css.map",
+    "main.f52b7fe3.js.map": "/mobx-calendar-demo/static/js/main.f52b7fe3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af652832.css",
+    "static/js/main.f52b7fe3.js"
+  ]
+}
