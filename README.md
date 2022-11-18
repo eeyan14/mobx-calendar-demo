@@ -1,8 +1,13 @@
-# MobX Calendar Demo
+# React Stores Demo
 
-A lil example of how MobX is set up & used in a React app, using a very (very very) simplified calendar.
+A lil example of how different types of stores (state management) are used in a React app, using a very (very very) simplified calendar.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). [Demo can be found here.](https://eeyan14.github.io/mobx-calendar-demo/)
+State management options:
+
+-   [Redux](https://redux.js.org/)
+-   [MobX](https://mobx.js.org/README.html)
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). [Demo can be found here.](https://eeyan14.github.io/react-stores-demo/)
 
 ## Running Locally
 

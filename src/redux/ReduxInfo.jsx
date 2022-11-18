@@ -1,87 +1,94 @@
 import React, { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
+import { useSelector } from "react-redux";
 
-import "./MobXInfo.css";
+import "../css/StoreInfo.css";
 
-const MobXInfo = observer((props) => {
-    const { view, currentDate, events } = props.store;
-    const [actionHistory, setActionHistory] = useState([]);
+/**
+ * This is the JSX view for the reducer, not the actual redux reducer,
+ * which is located in src/reducers
+ */
+const ReduxInfo = () => {
+    const { view, currentDate, events } = useSelector((state) => {
+        return {
+            view: state.calendar.view,
+            currentDate: state.calendar.currentDate,
+            events: state.calendar.events,
+        };
+    });
+
+    const [dispatchHistory, setDispatchHistory] = useState([]);
     const [historyHeight, setHistoryHeight] = useState("50vh");
 
     useEffect(() => {
-        setActionHistory((actionHistory) => [
-            { function: "setView()", view: view },
-            ...actionHistory,
+        setDispatchHistory((dispatchHistory) => [
+            { type: "SET_VIEW", view: view },
+            ...dispatchHistory,
         ]);
     }, [view]);
 
     useEffect(() => {
-        setActionHistory((actionHistory) => [
-            { function: "setCurrentDate()", currentDate: currentDate },
-            ...actionHistory,
+        setDispatchHistory((dispatchHistory) => [
+            { type: "SET_CURRENT_DATE", currentDate: currentDate },
+            ...dispatchHistory,
         ]);
     }, [currentDate]);
 
     useEffect(() => {
-        setActionHistory((actionHistory) => [
-            { function: "setEvents()", events: events },
-            ...actionHistory,
+        setDispatchHistory((dispatchHistory) => [
+            { type: "SET_EVENTS", events: events },
+            ...dispatchHistory,
         ]);
     }, [events]);
 
     useEffect(() => {
         /**
          * calculate height of current-store div to determine height of
-         * action-history (for scrolling)
+         * dispatch-history (for scrolling)
          */
         const storeHeight =
             document.getElementById("current-store").clientHeight;
         setHistoryHeight(`calc(100vh - ${storeHeight}px - 10rem)`);
-    }, [actionHistory]);
+    }, [dispatchHistory]);
 
     const renderShortEvents = (events) => {
-        const numEventKeys = Object.keys(events).length;
-        if (numEventKeys === 0) {
-            return <p className="code">&#123;&#125;</p>;
-        }
         return (
             <div>
-                <p className="code">&#123;</p>
-                {Object.keys(events).map((eventKey, i) => {
+                <p>&#123;</p>
+                {Object.keys(events).map((eventKey) => {
                     return (
-                        <p className="code indent">
+                        <p className="indent">
                             {eventKey}: [<i>{events[eventKey].length} events</i>
-                            ]{i < numEventKeys - 1 && ","}
+                            ]
                         </p>
                     );
                 })}
-                <p className="code">&#125;</p>
+                <p>&#125;</p>
             </div>
         );
     };
 
-    const renderActionHistoryItem = (item) => {
+    const renderDispatchHistoryItem = (item) => {
         // `type` should be the first item, then other keys
         return (
             <div className="history-values indent">
                 <div className="flex-row">
-                    <p>action:</p>
-                    <p className="code">{item.function}</p>
+                    <p className="code">type:</p>
+                    <p>"{item.type}",</p>
                 </div>
 
                 {Object.keys(item).map((itemKey) => {
-                    if (itemKey === "function") {
+                    if (itemKey === "type") {
                         return <></>;
                     }
 
                     return (
                         <div className="flex-row">
-                            <p>{itemKey}:</p>
-                            {itemKey === "events" ? (
-                                renderShortEvents(events)
-                            ) : (
-                                <p className="code">{item[itemKey]}</p>
-                            )}
+                            <p className="code">{itemKey}:</p>
+                            <p>
+                                {itemKey === "events"
+                                    ? renderShortEvents(events)
+                                    : item[itemKey]}
+                            </p>
                         </div>
                     );
                 })}
@@ -89,11 +96,13 @@ const MobXInfo = observer((props) => {
         );
     };
 
-    const renderActionHistory = () => {
-        return actionHistory.map((item, i) => {
+    const renderDispatchHistory = () => {
+        return dispatchHistory.map((item, i) => {
             return (
                 <div className="history-item" key={i}>
-                    {renderActionHistoryItem(item)}
+                    <p className="code">&#123;</p>
+                    {renderDispatchHistoryItem(item)}
+                    <p className="code">&#125;</p>
                 </div>
             );
         });
@@ -102,7 +111,7 @@ const MobXInfo = observer((props) => {
     return (
         <div className="reducer-view">
             <p>
-                <strong>MobX State</strong>
+                <strong>Redux State</strong>
             </p>
             <div id="current-store" className="grid">
                 <div className="grid-row">
@@ -122,17 +131,17 @@ const MobXInfo = observer((props) => {
             </div>
 
             <p>
-                <strong>Action History</strong>
+                <strong>Dispatch History</strong>
             </p>
             <div
-                id="action-history"
+                id="dispatch-history"
                 className="scroll"
                 style={{ height: historyHeight }}
             >
-                {renderActionHistory()}
+                {renderDispatchHistory()}
             </div>
         </div>
     );
-});
+};
 
-export default MobXInfo;
+export default ReduxInfo;

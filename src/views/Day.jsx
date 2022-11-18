@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { observer } from "mobx-react-lite";
 import { DateTime } from "luxon";
-import "./Day.css";
+import "../css/Day.css";
 
-const Day = observer((props) => {
-    const { currentDate, events, fetchEventsFromServer } = props.store;
+const Day = (props) => {
+    const { currentDate, events, fetchEvents } = props;
 
     const renderEvent = (event) => {
         const startTime = DateTime.now().set({
@@ -28,8 +27,8 @@ const Day = observer((props) => {
     };
 
     useEffect(() => {
-        fetchEventsFromServer([currentDate]);
-    }, [currentDate, fetchEventsFromServer]);
+        fetchEvents([currentDate]);
+    }, [currentDate, fetchEvents]);
 
     const eventsOnCurrentDate = events[currentDate];
 
@@ -38,6 +37,6 @@ const Day = observer((props) => {
             {eventsOnCurrentDate?.map((event) => renderEvent(event))}
         </div>
     );
-});
+};
 
 export default Day;

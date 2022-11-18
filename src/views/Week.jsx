@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
 import { DateTime } from "luxon";
 
-import "./Week.css";
+import "../css/Week.css";
 
-const Week = observer((props) => {
-    const { currentDate, events, fetchEventsFromServer } = props.store;
+const Week = (props) => {
+    const { currentDate, events, fetchEvents } = props;
 
     const [weekStart, setWeekStart] = useState(undefined); // DateTime
     const wdays = [0, 1, 2, 3, 4, 5, 6];
@@ -18,8 +17,8 @@ const Week = observer((props) => {
         for (let i = 0; i < 7; i++) {
             dates.push(weekStart.plus({ days: i }).toFormat("yyyy-LL-dd"));
         }
-        fetchEventsFromServer(dates);
-    }, [currentDate, fetchEventsFromServer]);
+        fetchEvents(dates);
+    }, [currentDate, fetchEvents]);
 
     const renderWeekHeader = (wday) => {
         const datetime = weekStart.plus({ days: wday });
@@ -71,6 +70,6 @@ const Week = observer((props) => {
             </div>
         </div>
     );
-});
+};
 
 export default Week;

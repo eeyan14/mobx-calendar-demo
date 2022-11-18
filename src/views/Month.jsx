@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
 import { DateTime } from "luxon";
 
-import "./Month.css";
+import "../css/Month.css";
 
-const Month = observer((props) => {
-    const { currentDate, setCurrentDate } = props.store;
+const Month = (props) => {
+    const { currentDate, setCurrentDate } = props;
 
     const [calendarHeight, _setCalendarHeight] = useState(null);
     const setCalendarHeight = () => {
@@ -79,6 +78,6 @@ const Month = observer((props) => {
     };
 
     return <div className="month-view">{renderDays()}</div>;
-});
+};
 
 export default Month;
