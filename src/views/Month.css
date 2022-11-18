@@ -1,0 +1,18 @@
+.month-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.month-view button.day {
+    justify-self: center;
+    align-self: center;
+    border-radius: 50%;
+    background: lightgray;
+    font-size: 2rem;
+    margin: 0.5rem;
+    border: none;
+}
+
+.month-view button.day.selected {
+    background: var(--main-color);
+}

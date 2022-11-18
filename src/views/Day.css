@@ -1,0 +1,23 @@
+.day-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.day-event-tile {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 2px solid var(--main-color);
+    border-left: 2rem solid var(--main-color);
+    box-sizing: border-box;
+}
+
+.day-event-tile p {
+    line-height: 2rem;
+}
+
+.day-event-tile p strong {
+    font-size: 1.5rem;
+}
