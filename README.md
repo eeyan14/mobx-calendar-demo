@@ -7,7 +7,7 @@ State management options:
 -   [Redux](https://redux.js.org/)
 -   [MobX](https://mobx.js.org/README.html)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). [Demo can be found here.](https://eeyan14.github.io/react-stores-demo/)
+[Demo can be found here.](https://eeyan14.github.io/react-stores-demo/)
 
 ## Running Locally
 
