@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import Month from "./views/Month";
 import Day from "./views/Day";
 import Week from "./views/Week";
-// import ReduxInfo from "./views/ReduxInfo";
+import MobXInfo from "./views/MobXInfo";
 
 import GithubLogo from "./github_logo.png";
 import "./Calendar.css";
@@ -52,7 +52,9 @@ const Calendar = observer((props) => {
                 </div>
             </section>
 
-            <section className="sidebar">{/*<ReduxInfo />*/}</section>
+            <section className="sidebar">
+                {<MobXInfo store={props.store} />}
+            </section>
 
             <a
                 href="https://github.com/eeyan14/redux-calendar-demo"
