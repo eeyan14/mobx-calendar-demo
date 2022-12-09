@@ -4,6 +4,9 @@ import { formatEventStartEnd } from "../helpers";
 
 import "../css/Week.css";
 
+export const EVENT_WEEK_TESTID = "week-event-tile";
+export const HEADER_WEEK_TESTID = "week-header-tile";
+
 const Week = (props) => {
     const { currentDate, events, fetchEvents } = props;
 
@@ -24,7 +27,11 @@ const Week = (props) => {
     const renderWeekHeader = (wday) => {
         const datetime = weekStart.plus({ days: wday });
         return (
-            <div className="week-header-tile" key={wday}>
+            <div
+                className={HEADER_WEEK_TESTID}
+                key={wday}
+                data-testid={HEADER_WEEK_TESTID}
+            >
                 <p>{datetime.toFormat("ccc")}</p>
                 <p>{datetime.toFormat("d")}</p>
             </div>
@@ -39,7 +46,11 @@ const Week = (props) => {
             const [startTime, endTime] = formatEventStartEnd(event);
             const key = `${event.start_hour}-${event.start_min}-${event.end_hour}-${event.end_min}`;
             return (
-                <div className="week-event-tile" key={key}>
+                <div
+                    className={EVENT_WEEK_TESTID}
+                    key={key}
+                    data-testid={EVENT_WEEK_TESTID}
+                >
                     <p>
                         <strong>{event.description}</strong>
                     </p>

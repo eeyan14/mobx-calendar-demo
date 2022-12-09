@@ -3,6 +3,8 @@ import { DateTime } from "luxon";
 
 import "../css/Month.css";
 
+export const DAY_BUTTON_TESTID = "day-button";
+
 const Month = (props) => {
     const { currentDate, setCurrentDate } = props;
 
@@ -39,6 +41,7 @@ const Month = (props) => {
 
         return (
             <button
+                data-testid={DAY_BUTTON_TESTID}
                 key={datetime.day}
                 className={clazzName}
                 style={{ width: buttonSize, height: buttonSize }}

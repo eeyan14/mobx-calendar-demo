@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { formatEventStartEnd } from "../helpers";
 import "../css/Day.css";
 
+export const EVENT_DAY_TESTID = "day-event-tile";
+
 const Day = (props) => {
     const { currentDate, events, fetchEvents } = props;
 
@@ -9,7 +11,11 @@ const Day = (props) => {
         const [startTime, endTime] = formatEventStartEnd(event);
         const key = `${event.start_hour}-${event.start_min}-${event.end_hour}-${event.end_min}`;
         return (
-            <div className="day-event-tile" key={key}>
+            <div
+                className={EVENT_DAY_TESTID}
+                key={key}
+                data-testid={EVENT_DAY_TESTID}
+            >
                 <p>
                     <strong>{event.description}</strong>
                 </p>

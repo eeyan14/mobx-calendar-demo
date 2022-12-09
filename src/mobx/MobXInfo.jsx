@@ -3,6 +3,8 @@ import { observer } from "mobx-react-lite";
 import StoreInfo from "../views/StoreInfo";
 import { renderShortEvents } from "../helpers";
 
+export const HISTORY_EVENT_TESTID = "history-event";
+
 const MobXInfo = observer((props) => {
     const { view, currentDate, events } = props.store;
     const [actionHistory, setActionHistory] = useState([]);
@@ -31,7 +33,10 @@ const MobXInfo = observer((props) => {
     const renderHistoryItem = (item) => {
         // `action` should be the first item, then other keys
         return (
-            <div className="history-values indent">
+            <div
+                className="history-values indent"
+                data-testid={HISTORY_EVENT_TESTID}
+            >
                 <div className="flex-row">
                     <p>action:</p>
                     <p className="code">{item.function}</p>

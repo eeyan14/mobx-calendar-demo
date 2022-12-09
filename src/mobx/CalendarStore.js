@@ -53,7 +53,6 @@ class CalendarStore {
     };
 
     setCurrentDate = (currentDate) => {
-        console.log("erm", currentDate, this);
         this.currentDate = currentDate;
     };
 
