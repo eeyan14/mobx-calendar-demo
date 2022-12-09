@@ -1,14 +1,31 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import CalendarStore from "../../mobx/CalendarStore";
 import MobXInfo from "../../mobx/MobXInfo";
 import { HISTORY_EVENT_TESTID } from "../../mobx/MobXInfo";
+import { CURRENT_STORE_TESTID } from "../../views/StoreInfo";
 
 describe("mobx/MobXInfo", () => {
     const INITIAL_EVENTS_COUNT = 3;
     let store;
     beforeEach(() => {
         store = new CalendarStore("month", "2022-12-01", {});
+    });
+
+    test("renders initial state", () => {
+        render(<MobXInfo store={store} />);
+        const storeSection = screen.getByTestId(CURRENT_STORE_TESTID);
+        expect(screen.getByText("Store")).toBeVisible();
+        expect(within(storeSection).getByText("view")).toBeVisible();
+        expect(within(storeSection).getByText("currentDate")).toBeVisible();
+        expect(within(storeSection).getByText("events")).toBeVisible();
+    });
+
+    test("displayed state is updated", () => {
+        render(<MobXInfo store={store} />);
+        const storeSection = screen.getByTestId(CURRENT_STORE_TESTID);
+        act(() => store.setView("day"));
+        expect(within(storeSection).getByText('"day"')).toBeVisible();
     });
 
     test("renders initial events", () => {

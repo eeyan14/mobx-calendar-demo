@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { renderShortEvents } from "../helpers";
 import "../css/StoreInfo.css";
 
+export const CURRENT_STORE_TESTID = "current-store";
+export const HISTORY_LIST_TESTID = "history-list";
+
 const StoreInfo = (props) => {
     const { view, currentDate, events, history, renderHistory } = props;
     const [historyHeight, setHistoryHeight] = useState("50vh");
@@ -21,7 +24,11 @@ const StoreInfo = (props) => {
             <p>
                 <strong>Store</strong>
             </p>
-            <div id="current-store" className="grid">
+            <div
+                id={CURRENT_STORE_TESTID}
+                className="grid"
+                data-testid={CURRENT_STORE_TESTID}
+            >
                 <div className="grid-row">
                     <p className="code">view</p>
                     <p>"{view}"</p>
@@ -41,7 +48,11 @@ const StoreInfo = (props) => {
             <p>
                 <strong>History</strong>
             </p>
-            <div className="scroll" style={{ height: historyHeight }}>
+            <div
+                className="scroll"
+                style={{ height: historyHeight }}
+                data-testid={HISTORY_LIST_TESTID}
+            >
                 {renderHistory()}
             </div>
         </div>
