@@ -44,7 +44,7 @@ class CalendarStore {
                 )}`;
             }
         }
-        return title;
+        return title.toUpperCase();
     }
 
     // use arrow functions for setter functions to access `this`

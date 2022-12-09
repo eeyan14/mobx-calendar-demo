@@ -38,7 +38,7 @@ const CalendarWrapper = () => {
                 )}`;
             }
         }
-        return title;
+        return title.toUpperCase();
     };
 
     const setView = (view) => {
