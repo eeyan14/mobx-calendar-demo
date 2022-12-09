@@ -4,6 +4,7 @@ import "../css/StoreInfo.css";
 
 export const CURRENT_STORE_TESTID = "current-store";
 export const HISTORY_LIST_TESTID = "history-list";
+export const HISTORY_EVENT_TESTID = "history-event";
 
 const StoreInfo = (props) => {
     const { view, currentDate, events, history, renderHistory } = props;

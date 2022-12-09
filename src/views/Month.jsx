@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 import "../css/Month.css";
 
 export const DAY_BUTTON_TESTID = "day-button";
+export const DAY_BUTTON_SELECTED_TESTID = "day-button-selected";
 
 const Month = (props) => {
     const { currentDate, setCurrentDate } = props;

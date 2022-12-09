@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import StoreInfo from "../views/StoreInfo";
+import StoreInfo, { HISTORY_EVENT_TESTID } from "../views/StoreInfo";
 import { renderShortEvents } from "../helpers";
-
-export const HISTORY_EVENT_TESTID = "history-event";
 
 const MobXInfo = observer((props) => {
     const { view, currentDate, events } = props.store;

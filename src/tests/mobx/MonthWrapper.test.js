@@ -10,9 +10,8 @@ describe("mobx/MonthWrapper", () => {
         store = new CalendarStore("month", "2022-12-01", {});
     });
 
-    test("fetches and renders days in month", () => {
+    test("renders days in month", () => {
         render(<MonthWrapper store={store} />);
-        expect(Object.keys(store.events).length).toBe(0);
         const days = screen.getAllByTestId(DAY_BUTTON_TESTID);
         expect(days.length).toBe(31);
     });

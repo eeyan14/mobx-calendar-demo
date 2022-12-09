@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import StoreInfo from "../views/StoreInfo";
+import StoreInfo, { HISTORY_EVENT_TESTID } from "../views/StoreInfo";
 import { renderShortEvents } from "../helpers";
 
 /**
@@ -71,7 +71,11 @@ const ReduxInfo = () => {
     const renderHistory = () => {
         return dispatchHistory.map((item, i) => {
             return (
-                <div className="history-item" key={i}>
+                <div
+                    className={HISTORY_EVENT_TESTID}
+                    key={i}
+                    data-testid={HISTORY_EVENT_TESTID}
+                >
                     <p className="code">&#123;</p>
                     {renderHistoryItem(item)}
                     <p className="code">&#125;</p>

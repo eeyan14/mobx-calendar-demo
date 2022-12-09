@@ -1,5 +1,10 @@
 import CalendarStore from "../../mobx/CalendarStore";
 
+/**
+ * This test suite is perhaps not all that necessary, since other
+ * tests actually test for UI updates based on state changes, but
+ * it is a decent example of testing the store itself.
+ */
 describe("mobx/CalendarStore", () => {
     let store;
     beforeEach(() => {
