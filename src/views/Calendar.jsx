@@ -1,8 +1,53 @@
 import React from "react";
+import { DateTime } from "luxon";
 import "../css/Calendar.css";
 
 const Calendar = (props) => {
-    const { calendarTitle, renderViews, renderSidebar, view, setView } = props;
+    const {
+        calendarTitle,
+        currentDate,
+        renderViews,
+        renderSidebar,
+        view,
+        setCurrentDate,
+        setView,
+    } = props;
+
+    const handleNavigatePrevious = () => {
+        let dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        switch (view) {
+            case "month":
+                dateObj = dateObj.minus({ months: 1 }).startOf("month");
+                break;
+            case "week":
+                dateObj = dateObj.minus({ weeks: 1 }).startOf("week");
+                break;
+            case "day":
+                dateObj = dateObj.minus({ days: 1 });
+                break;
+            default:
+                break;
+        }
+        setCurrentDate(dateObj.toFormat("yyyy-LL-dd"));
+    };
+
+    const handleNavigateNext = () => {
+        let dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        switch (view) {
+            case "month":
+                dateObj = dateObj.plus({ months: 1 }).startOf("month");
+                break;
+            case "week":
+                dateObj = dateObj.plus({ weeks: 1 }).startOf("week");
+                break;
+            case "day":
+                dateObj = dateObj.plus({ days: 1 });
+                break;
+            default:
+                break;
+        }
+        setCurrentDate(dateObj.toFormat("yyyy-LL-dd"));
+    };
 
     const renderViewOptions = () => {
         return (
@@ -35,7 +80,29 @@ const Calendar = (props) => {
 
                 <div id="calendar-container">
                     <div className="calendar-header">
+                        <button
+                            className="navigate previous"
+                            onClick={handleNavigatePrevious}
+                        >
+                            <span
+                                className="material-symbols-outlined"
+                                aria-label="Previous"
+                            >
+                                arrow_back_ios
+                            </span>
+                        </button>
                         <h1>{calendarTitle}</h1>
+                        <button
+                            className="navigate next"
+                            onClick={handleNavigateNext}
+                        >
+                            <span
+                                className="material-symbols-outlined"
+                                aria-label="Next"
+                            >
+                                arrow_forward_ios
+                            </span>
+                        </button>
                     </div>
 
                     {renderViews()}

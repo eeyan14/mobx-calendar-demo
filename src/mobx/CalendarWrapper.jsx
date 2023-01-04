@@ -8,7 +8,8 @@ import MobXInfo from "./MobXInfo";
 import Calendar from "../views/Calendar";
 
 const CalendarWrapper = observer((props) => {
-    const { view, calendarTitle, setView } = props.store;
+    const { view, calendarTitle, currentDate, setCurrentDate, setView } =
+        props.store;
 
     const renderViews = () => {
         return (
@@ -27,9 +28,11 @@ const CalendarWrapper = observer((props) => {
     return (
         <Calendar
             calendarTitle={calendarTitle}
+            currentDate={currentDate}
             renderViews={renderViews}
             renderSidebar={renderSidebar}
             view={view}
+            setCurrentDate={setCurrentDate}
             setView={setView}
         />
     );

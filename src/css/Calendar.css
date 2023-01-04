@@ -49,7 +49,20 @@
     border-top-right-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.calendar-header button.navigate {
+    background: none;
+    border: none;
+    outline: none;
+    height: fit-content;
+    width: fit-content;
+    padding: 0 1rem;
+}
+
+.calendar-header button.navigate span {
+    font-size: 2rem;
 }
 
 @media only screen and (max-width: 1400px) {

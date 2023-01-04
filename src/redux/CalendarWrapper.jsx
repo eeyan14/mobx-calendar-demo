@@ -41,6 +41,10 @@ const CalendarWrapper = () => {
         return title.toUpperCase();
     };
 
+    const setCurrentDate = (currentDate) => {
+        dispatch({ type: "SET_CURRENT_DATE", currentDate });
+    };
+
     const setView = (view) => {
         dispatch({ type: "SET_VIEW", view: view });
     };
@@ -64,9 +68,11 @@ const CalendarWrapper = () => {
     return (
         <Calendar
             calendarTitle={calendarTitle}
+            currentDate={currentDate}
             renderViews={renderViews}
             renderSidebar={renderSidebar}
             view={view}
+            setCurrentDate={setCurrentDate}
             setView={setView}
         />
     );
