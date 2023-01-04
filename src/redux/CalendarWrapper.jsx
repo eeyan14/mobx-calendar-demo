@@ -7,6 +7,7 @@ import DayWrapper from "./DayWrapper";
 import WeekWrapper from "./WeekWrapper";
 import ReduxInfo from "./ReduxInfo";
 import Calendar from "../views/Calendar";
+import { DATE_FORMAT } from "../helpers";
 
 const CalendarWrapper = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const CalendarWrapper = () => {
     });
 
     const getTitle = () => {
-        const dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        const dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
         let title = dateObj.toFormat("LLLL");
         if (view === "day") {
             title = dateObj.toFormat("LLLL d");

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DateTime } from "luxon";
+import { DATE_FORMAT } from "../helpers";
 
 import "../css/Month.css";
 
@@ -30,7 +31,7 @@ const Month = (props) => {
 
     const renderDay = (datetime) => {
         let clazzName = "day";
-        const date = datetime.toFormat("yyyy-LL-dd");
+        const date = datetime.toFormat(DATE_FORMAT);
         if (currentDate === date) {
             clazzName += " selected";
         }
@@ -54,7 +55,7 @@ const Month = (props) => {
     };
 
     const renderDays = () => {
-        const dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        const dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
         const numDaysInMonth = dateObj.endOf("month").day;
         let firstDayOfMonth = dateObj.startOf("month");
         const daysArr = [];

@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import { DATE_FORMAT } from "../../helpers";
 
 const initialState = {
     /**
@@ -9,7 +10,7 @@ const initialState = {
     /**
      * `currentDate` (string): "yyyy-mm-dd"
      */
-    currentDate: DateTime.now().toFormat("yyyy-LL-dd"),
+    currentDate: DateTime.now().toFormat(DATE_FORMAT),
 
     /**
      * `events` (object): keys are strings in format "yyyy-mm-dd"

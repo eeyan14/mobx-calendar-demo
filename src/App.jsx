@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DateTime } from "luxon";
 
 import GithubLogo from "./github_logo.png";
+import { DATE_FORMAT } from "./helpers";
 
 // redux imports
 import { configureStore } from "@reduxjs/toolkit";
@@ -51,7 +52,7 @@ const App = () => {
         } else if (storeType === "mobx") {
             const store = new CalendarStore(
                 "month",
-                DateTime.now().toFormat("yyyy-LL-dd"),
+                DateTime.now().toFormat(DATE_FORMAT),
                 {}
             );
             return <CalendarMobX store={store} />;

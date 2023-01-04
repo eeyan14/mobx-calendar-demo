@@ -1,6 +1,8 @@
 import React from "react";
 import { DateTime } from "luxon";
 
+export const DATE_FORMAT = "yyyy-LL-dd";
+
 /**
  * Returns a JSX Element that displays a short list of events.
  *

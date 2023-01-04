@@ -1,5 +1,6 @@
 import React from "react";
 import { DateTime } from "luxon";
+import { DATE_FORMAT } from "../helpers";
 import "../css/Calendar.css";
 
 const Calendar = (props) => {
@@ -14,7 +15,7 @@ const Calendar = (props) => {
     } = props;
 
     const handleNavigatePrevious = () => {
-        let dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        let dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
         switch (view) {
             case "month":
                 dateObj = dateObj.minus({ months: 1 }).startOf("month");
@@ -28,11 +29,11 @@ const Calendar = (props) => {
             default:
                 break;
         }
-        setCurrentDate(dateObj.toFormat("yyyy-LL-dd"));
+        setCurrentDate(dateObj.toFormat(DATE_FORMAT));
     };
 
     const handleNavigateNext = () => {
-        let dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        let dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
         switch (view) {
             case "month":
                 dateObj = dateObj.plus({ months: 1 }).startOf("month");
@@ -46,7 +47,7 @@ const Calendar = (props) => {
             default:
                 break;
         }
-        setCurrentDate(dateObj.toFormat("yyyy-LL-dd"));
+        setCurrentDate(dateObj.toFormat(DATE_FORMAT));
     };
 
     const renderViewOptions = () => {

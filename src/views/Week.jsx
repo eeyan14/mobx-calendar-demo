@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DateTime } from "luxon";
-import { formatEventStartEnd } from "../helpers";
+import { DATE_FORMAT, formatEventStartEnd } from "../helpers";
 
 import "../css/Week.css";
 
@@ -14,12 +14,12 @@ const Week = (props) => {
     const wdays = [0, 1, 2, 3, 4, 5, 6];
 
     useEffect(() => {
-        const dateObj = DateTime.fromFormat(currentDate, "yyyy-LL-dd");
+        const dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
         const weekStart = dateObj.startOf("week").minus({ days: 1 });
         setWeekStart(weekStart);
         const dates = [];
         for (let i = 0; i < 7; i++) {
-            dates.push(weekStart.plus({ days: i }).toFormat("yyyy-LL-dd"));
+            dates.push(weekStart.plus({ days: i }).toFormat(DATE_FORMAT));
         }
         fetchEvents(dates);
     }, [currentDate, fetchEvents]);
@@ -40,7 +40,7 @@ const Week = (props) => {
 
     const renderEvents = (wday) => {
         const datetime = weekStart.plus({ days: wday });
-        const date = datetime.toFormat("yyyy-LL-dd");
+        const date = datetime.toFormat(DATE_FORMAT);
         const eventsOnDate = events[date];
         return eventsOnDate?.map((event) => {
             const [startTime, endTime] = formatEventStartEnd(event);

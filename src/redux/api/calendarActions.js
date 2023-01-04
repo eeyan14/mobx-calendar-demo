@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
+import { DATE_FORMAT } from "../../helpers";
 
 /**
- * @param {String[]} dates array of strings in format "yyyy-LL-dd"
+ * @param {String[]} dates array of strings in format DATE_FORMAT
  *
  * @return {Object} keys = "yyyy-mm-dd", values = array of events
  *
@@ -11,7 +12,7 @@ export const getEvents = (dates) => {
     // We're just going to mock an API call, but theoretically you would
     // actually go fetch events from the server here
     dates.forEach((date) => {
-        const dateObj = DateTime.fromFormat(date, "yyyy-LL-dd");
+        const dateObj = DateTime.fromFormat(date, DATE_FORMAT);
         events[date] = getEventsOnDate(dateObj);
     });
     return { type: "SET_EVENTS", events: events };

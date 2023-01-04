@@ -1,10 +1,10 @@
 import { makeObservable, observable, computed, action } from "mobx";
 import { DateTime } from "luxon";
-import { getEventsOnDate } from "../helpers";
+import { DATE_FORMAT, getEventsOnDate } from "../helpers";
 
 class CalendarStore {
     view = "month";
-    currentDate = DateTime.now().toFormat("yyyy-LL-dd");
+    currentDate = DateTime.now().toFormat(DATE_FORMAT);
     events = {};
 
     constructor(view, currentDate, events) {
@@ -25,7 +25,7 @@ class CalendarStore {
     }
 
     get calendarTitle() {
-        const dateObj = DateTime.fromFormat(this.currentDate, "yyyy-LL-dd");
+        const dateObj = DateTime.fromFormat(this.currentDate, DATE_FORMAT);
         let title = dateObj.toFormat("LLLL");
         if (this.view === "day") {
             title = dateObj.toFormat("LLLL d");
@@ -68,7 +68,7 @@ class CalendarStore {
         // We're just going to mock an API call, but theoretically you would
         // actually go fetch events from the server here
         dates.forEach((date) => {
-            const dateObj = DateTime.fromFormat(date, "yyyy-LL-dd");
+            const dateObj = DateTime.fromFormat(date, DATE_FORMAT);
             events[date] = getEventsOnDate(dateObj);
         });
         this.setEvents(events);
