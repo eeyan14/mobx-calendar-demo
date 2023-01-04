@@ -27,6 +27,47 @@ p.code {
 .scroll {
     /* height is set in component using js */
     overflow-y: scroll;
+    padding: 1rem 0;
+    box-sizing: border-box;
+
+    /* mask css from https://pqina.nl/blog/fade-out-overflow-using-css-mask-image/ */
+
+    /* scroll bar width, for use in mask calculations */
+    --scrollbar-width: 8px;
+
+    /* mask fade distance, for use in mask calculations */
+    --mask-height: 2rem;
+
+    /* The content mask is a linear gradient from top to bottom */
+    --mask-image-content: linear-gradient(
+        to bottom,
+        transparent,
+        black var(--mask-height),
+        black calc(100% - var(--mask-height)),
+        transparent
+    );
+
+    /* Here we scale the content gradient to the width of the container
+    minus the scrollbar width. The height is the full container height */
+    --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+
+    /* The scrollbar mask is a black pixel */
+    --mask-image-scrollbar: linear-gradient(black, black);
+
+    /* The width of our black pixel is the width of the scrollbar.
+    The height is the full container height */
+    --mask-size-scrollbar: var(--scrollbar-width) 100%;
+
+    /* Apply the mask image and mask size variables */
+    mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+    mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+
+    /* Position the content gradient in the top left, and the
+    scroll gradient in the top right */
+    mask-position: 0 0, 100% 0;
+
+    /* We don't repeat our mask images */
+    mask-repeat: no-repeat, no-repeat;
 }
 
 .flex-row {
@@ -38,9 +79,10 @@ p.code {
     margin-left: 2rem;
 }
 
-.history-item {
-    padding: 0.5rem;
-    border-bottom: 1px solid grey;
+.history-event {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border: 1px solid grey;
 }
 
 .history-values .flex-row p:first-of-type {
@@ -50,4 +92,8 @@ p.code {
 .history-values p {
     max-height: 5rem;
     overflow-y: scroll;
+}
+
+.history-values p.code {
+    font-size: 1.1rem;
 }

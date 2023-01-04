@@ -42,10 +42,10 @@ const ReduxInfo = () => {
     const renderHistoryItem = (item) => {
         // `type` should be the first item, then other keys
         return (
-            <div className="history-values indent">
+            <div className="history-values">
                 <div className="flex-row">
                     <p className="code">type:</p>
-                    <p>"{item.type}",</p>
+                    <p className="code">"{item.type}",</p>
                 </div>
 
                 {Object.keys(item).map((itemKey) => {
@@ -59,7 +59,7 @@ const ReduxInfo = () => {
                             {itemKey === "events" ? (
                                 renderShortEvents(events)
                             ) : (
-                                <p>{item[itemKey]}</p>
+                                <p className="code">{item[itemKey]}</p>
                             )}
                         </div>
                     );
@@ -76,9 +76,7 @@ const ReduxInfo = () => {
                     key={i}
                     data-testid={HISTORY_EVENT_TESTID}
                 >
-                    <p className="code">&#123;</p>
                     {renderHistoryItem(item)}
-                    <p className="code">&#125;</p>
                 </div>
             );
         });

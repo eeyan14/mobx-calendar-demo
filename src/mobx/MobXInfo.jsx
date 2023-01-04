@@ -31,10 +31,7 @@ const MobXInfo = observer((props) => {
     const renderHistoryItem = (item) => {
         // `action` should be the first item, then other keys
         return (
-            <div
-                className="history-values indent"
-                data-testid={HISTORY_EVENT_TESTID}
-            >
+            <div className="history-values" data-testid={HISTORY_EVENT_TESTID}>
                 <div className="flex-row">
                     <p>action:</p>
                     <p className="code">{item.function}</p>
@@ -63,7 +60,7 @@ const MobXInfo = observer((props) => {
     const renderHistory = () => {
         return actionHistory.map((item, i) => {
             return (
-                <div className="history-item" key={i}>
+                <div className={HISTORY_EVENT_TESTID} key={i}>
                     {renderHistoryItem(item)}
                 </div>
             );
