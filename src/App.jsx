@@ -14,28 +14,35 @@ import { default as CalendarRedux } from "./redux/CalendarWrapper";
 import { default as CalendarMobX } from "./mobx/CalendarWrapper";
 import CalendarStore from "./mobx/CalendarStore";
 
+// context imports
+import { default as CalendarContext } from "./context/CalendarWrapper"
+
 import "./css/App.css";
 
 const App = () => {
-    const [storeType, setStoreType] = useState("mobx"); // "redux", "mobx"
+    const storeOptions = {
+        redux: "Redux",
+        mobx: "MobX",
+        context: "Context",
+    };
+    const [storeType, setStoreType] = useState("context");
 
     const handleSelectStoreType = (e) => {
         setStoreType(e.target.value);
     };
 
     const renderStoreOptions = () => {
-        return ["Redux", "MobX"].map((option) => {
-            const optionLowercase = option.toLowerCase();
+        return Object.keys(storeOptions).map((optionKey) => {
             return (
-                <label key={option}>
+                <label key={optionKey}>
                     <input
                         type="radio"
-                        name={optionLowercase}
-                        value={optionLowercase}
-                        checked={storeType === optionLowercase}
+                        name={storeOptions[optionKey]}
+                        value={optionKey}
+                        checked={storeType === optionKey}
                         onChange={handleSelectStoreType}
                     />
-                    {option}
+                    {storeOptions[optionKey]}
                 </label>
             );
         });
@@ -56,6 +63,10 @@ const App = () => {
                 {}
             );
             return <CalendarMobX store={store} />;
+        } else if (storeType === "context") {
+            return (
+                <CalendarContext />
+            );
         }
     };
 

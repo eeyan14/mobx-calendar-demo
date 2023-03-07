@@ -1,6 +1,6 @@
 import { makeObservable, observable, computed, action } from "mobx";
 import { DateTime } from "luxon";
-import { DATE_FORMAT, getEventsOnDate } from "../helpers";
+import { DATE_FORMAT, getEventsOnDate, formatTitle } from "../helpers";
 
 class CalendarStore {
     view = "month";
@@ -25,26 +25,7 @@ class CalendarStore {
     }
 
     get calendarTitle() {
-        const dateObj = DateTime.fromFormat(this.currentDate, DATE_FORMAT);
-        let title = dateObj.toFormat("LLLL");
-        if (this.view === "day") {
-            title = dateObj.toFormat("LLLL d");
-        } else if (this.view === "week") {
-            // startOf / endOf goes to the nearest Monday / Saturday, so subtract 1
-            // to view Sunday – Saturday
-            const weekStart = dateObj.startOf("week").minus({ days: 1 });
-            const weekEnd = dateObj.endOf("week").minus({ days: 1 });
-            if (weekStart.toFormat("LLLL") !== weekEnd.toFormat("LLLL")) {
-                title = `${weekStart.toFormat("LLLL d")} – ${weekEnd.toFormat(
-                    "LLLL d"
-                )}`;
-            } else {
-                title = `${weekStart.toFormat("LLLL d")} – ${weekEnd.toFormat(
-                    "d"
-                )}`;
-            }
-        }
-        return title.toUpperCase();
+        return formatTitle(this.view, this.currentDate);
     }
 
     // use arrow functions for setter functions to access `this`

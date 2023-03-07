@@ -128,3 +128,34 @@ export const formatEventStartEnd = (event) => {
 
     return [startTime, endTime];
 };
+
+/**
+ * Formats calendar title
+ *
+ * @param {String} view "month", "day", "week"
+ * @param {String} currentDate yyyy-mm-dd
+ *
+ * @returns {String}
+ */
+export const formatTitle = (view, currentDate) => {
+    const dateObj = DateTime.fromFormat(currentDate, DATE_FORMAT);
+    let title = dateObj.toFormat("LLLL");
+    if (view === "day") {
+        title = dateObj.toFormat("LLLL d");
+    } else if (view === "week") {
+        // startOf / endOf goes to the nearest Monday / Saturday, so subtract 1
+        // to view Sunday – Saturday
+        const weekStart = dateObj.startOf("week").minus({ days: 1 });
+        const weekEnd = dateObj.endOf("week").minus({ days: 1 });
+        if (weekStart.toFormat("LLLL") !== weekEnd.toFormat("LLLL")) {
+            title = `${weekStart.toFormat("LLLL d")} – ${weekEnd.toFormat(
+                "LLLL d"
+            )}`;
+        } else {
+            title = `${weekStart.toFormat("LLLL d")} – ${weekEnd.toFormat(
+                "d"
+            )}`;
+        }
+    }
+    return title.toUpperCase();
+}

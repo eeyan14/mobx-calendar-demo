@@ -6,6 +6,7 @@ State management options:
 
 -   [Redux](https://redux.js.org/)
 -   [MobX](https://mobx.js.org/README.html)
+-   [Context](https://reactjs.org/docs/context.html)
 
 [Demo can be found here.](https://eeyan14.github.io/react-stores-demo/)
 
